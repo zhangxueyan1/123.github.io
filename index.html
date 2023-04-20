@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+	<title>奶茶随机选择器</title>
+	<style>
+		body {
+			background-color: #F5F5F5;
+			color: #333;
+			font-family: 'Segoe UI', sans-serif;
+		}
+
+		h1 {
+			text-align: center;
+		}
+
+		label {
+			display: block;
+			margin-bottom: 10px;
+			font-size: 18px;
+		}
+
+		textarea {
+			display: block;
+			width: 100%;
+			height: 200px;
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			font-size: 16px;
+			resize: none;
+		}
+
+		button {
+			display: block;
+			margin: 20px auto;
+			padding: 10px 20px;
+			background-color: #FFB6C1;
+			color: #FFF;
+			border: none;
+			border-radius: 5px;
+			box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+			font-size: 18px;
+			cursor: pointer;
+		}
+
+		#result {
+			text-align: center;
+			margin-top: 20px;
+			font-size: 24px;
+			font-weight: bold;
+			color: #FFB6C1;
+			text-shadow: 1px 1px 1px #000;
+		}
+	</style>
+</head>
+<body>
+	<h1>今天喝什么奶茶？</h1>
+	<label for="input-teas">输入奶茶种类（每行一个）：</label>
+	<textarea id="input-teas" placeholder="例如：珍珠奶茶"></textarea>
+	<button onclick="chooseTea()">随机选择</button>
+	<p id="result"></p>
+	<script>
+		function chooseTea() {
+			var input = document.getElementById("input-teas").value;
+			var teas = input.split("\n");
+			var randomIndex = Math.floor(Math.random() * teas.length);
+			var result = document.getElementById("result");
+			result.innerHTML = "今天喝 " + teas[randomIndex] + " 奶茶！";
+		}
+function chooseTea() {
+    var input = document.getElementById("input-teas").value;
+    var teas = input.split("\n");
+    var randomIndex = Math.floor(Math.random() * teas.length);
+    var result = document.getElementById("result");
+    result.innerHTML = "";
+
+    // 假设奶茶的滚动速度为100ms/次，滚动30次后停止
+    var speed = 100;
+    var times = 30;
+    var count = 0;
+    var timer = setInterval(function() {
+        result.innerHTML = "今天喝 " + teas[randomIndex] + " 奶茶！";
+        randomIndex = (randomIndex + 1) % teas.length;
+        count++;
+
+        if (count === times) {
+            clearInterval(timer);
+            result.innerHTML = "今天喝 " + teas[randomIndex] + " 奶茶！";
+        }
+    }, speed);
+}
+
+	</script>
+</body>
+</html>
